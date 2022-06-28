@@ -9,9 +9,8 @@ CREATE TABLE clients (
 
 CREATE TABLE todos (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    client_id BIGINT,
-    description NOT NULL,
-    completed BOOLEAN NOT NULL DEFAULT(false),
-    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-    FOREIGN KEY (client_id) REFERENCES clients(id)
-)
+    client_id BIGINT NOT NULL,
+    description VARCHAR NOT NULL,
+    completed BOOLEAN NOT NULL DEFAULT(false)
+
+);
