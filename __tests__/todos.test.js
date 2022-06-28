@@ -45,7 +45,7 @@ describe('todos', () => {
   });
 
   it('Should return all current clients todos', async () => {
-    const agent = await signAndLogin();
+    const [agent, client] = await signAndLogin();
     const client2 = await ClientService.create(fakeClient2);
     const clientTodo = await Todo.insert({
       description: 'Workout',
@@ -58,7 +58,7 @@ describe('todos', () => {
       competed: false,
     });
     const resp = await agent.get('/api/v1/todos');
-    expect(resp.body).toEqual([clientTodo]);
+    expect(resp.body).toEqual(clientTodo);
   });
 
   afterAll(() => {
