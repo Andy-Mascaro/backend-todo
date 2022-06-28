@@ -14,7 +14,9 @@ const signAndLogin = async (clientProps = {}) => {
   const agent = request.agent(app);
   const client = await ClientService.create({ ...fakeClient, ...clientProps });
   const { email } = client;
-  await agent.post('/api/v1/client/sessions').send({ email, password });
+  const post = await agent
+    .post('/api/v1/clients/sessions')
+    .send({ email, password });
   return [agent, client];
 };
 
