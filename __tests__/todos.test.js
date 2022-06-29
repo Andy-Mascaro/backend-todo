@@ -71,7 +71,7 @@ describe('todos', () => {
     const resp = await agent
       .put(`/api/v1/todos/${todo.id}`)
       .send({ completed: true });
-    // expect(resp.status).toBe(200);
+    expect(resp.status).toBe(200);
     expect(resp.body).toEqual({ ...todo, completed: true });
   });
 
@@ -85,6 +85,11 @@ describe('todos', () => {
     expect(resp.status).toBe(200);
     const remove = await Todo.getById(todo.id);
     expect(remove).toBeNull();
+  });
+
+  it('Test to be denied in the .get if not logged in', async () => {
+    const data = await request(app).get('/api/v1/todos');
+    expect(data.status).toEqual(401);
   });
 
   afterAll(() => {
