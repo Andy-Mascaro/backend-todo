@@ -75,6 +75,18 @@ describe('todos', () => {
     expect(resp.body).toEqual({ ...todo, completed: true });
   });
 
+  it('DELETE /api/v1/todos/:id should delete todos from valid client', async () => {
+    const [agent, client] = await signAndLogin();
+    const todo = await Todo.insert({
+      description: 'Workout',
+      client_id: client.id,
+    });
+    const resp = await agent.delete(`/api/v1/todos/${todo.id}`);
+    expect(resp.status).toBe(200);
+    const remove = await Todo.getById(todo.id);
+    expect(remove).toBeNull();
+  });
+
   afterAll(() => {
     pool.end();
   });
