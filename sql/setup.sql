@@ -14,3 +14,7 @@ CREATE TABLE todos (
     completed BOOLEAN NOT NULL DEFAULT(false)
 
 );
+
+-- INSERT INTO todos( client_id, description)
+
+-- VALUES ('8', 'workout');

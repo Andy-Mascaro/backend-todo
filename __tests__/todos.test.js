@@ -32,7 +32,7 @@ describe('todos', () => {
     return setup(pool);
   });
 
-  it('Get /api/v1/todos creates a new todo item for current client', async () => {
+  it('POST /api/v1/todos creates a new todo item for current client', async () => {
     const [agent] = await signAndLogin();
     const newTodo = { description: 'Paint fence' };
     const resp = await agent.post('/api/v1/todos/').send(newTodo);
@@ -48,17 +48,17 @@ describe('todos', () => {
     const [agent, client] = await signAndLogin();
     const client2 = await ClientService.create(fakeClient2);
     const clientTodo = await Todo.insert({
-      description: 'Workout',
+      description: 'workout',
       client_id: client.id,
       completed: false,
     });
     await Todo.insert({
       description: 'Do laundry',
       client_id: client2.id,
-      competed: false,
+      completed: false,
     });
-    const resp = await agent.get('/api/v1/todos');
-    expect(resp.body).toEqual(clientTodo);
+    const resp = await agent.get('/api/v1/todos/');
+    expect(resp.body).toEqual([clientTodo]);
   });
 
   it('UPDATE /api/v1/todos/:id should update an todo', async () => {

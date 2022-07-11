@@ -5,6 +5,8 @@ const app = require('../lib/app');
 const ClientService = require('../lib/services/ClientService');
 
 const fakeClient = {
+  firstName: 'Bob',
+  lastName: 'Bigboy',
   email: 'fake@fake.com',
   password: '111111',
 };
